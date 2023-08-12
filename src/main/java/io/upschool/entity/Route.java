@@ -9,7 +9,7 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Data
-@Table(name = "routes")
+@Table(name = "route")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,6 +25,10 @@ public class Route {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "departure_airport_id" , nullable = false)
     private Airport departureAirport;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "airline_company_id" , nullable = false)
+    private AirlineCompany airlineCompany;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "arrival_airport_id" , nullable = false)

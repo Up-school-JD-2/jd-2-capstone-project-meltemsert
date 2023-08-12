@@ -4,17 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FlightSaveRequest {
-    private Long routeId;
+public class FlightResponse {
+    private Long flightId;
+    private String routeName;
     private String flightNumber;
     private LocalDateTime departureDateAndTime;
     private LocalDateTime arrivalDateAndTime;
-    private Long airlineCompanyId;
+    private String airlineCompanyName;
+    private int capacity;
     private float price;
 }

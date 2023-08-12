@@ -1,10 +1,11 @@
 package io.upschool.controller;
 
 import io.upschool.dto.BaseResponse;
-import io.upschool.dto.city.CitySaveRequest;
-import io.upschool.dto.city.CitySaveResponse;
+import io.upschool.dto.city.CityRequest;
+import io.upschool.dto.city.CityResponse;
 import io.upschool.entity.City;
 import io.upschool.service.CityService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,9 @@ public class CityController {
     private final CityService cityService;
 
     @GetMapping
-    public ResponseEntity<Object> getArticles() {
+    public ResponseEntity<Object> getCities() {
         var cities = cityService.getAllCities();
-        var response=
-                BaseResponse.<List<CitySaveResponse>>builder()
+        var response= BaseResponse.<List<CityResponse>>builder()
                         .status(HttpStatus.OK.value())
                         .isSuccess(true)
                         .data(cities)
@@ -37,12 +37,12 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createCity(@RequestBody CitySaveRequest request){
-       var citySaveResponse= cityService.save(request);
-       var response=BaseResponse.<CitySaveResponse>builder()
+    public ResponseEntity<Object> createCity(@Valid @RequestBody CityRequest request){
+       var city= cityService.save(request);
+       var response=BaseResponse.<CityResponse>builder()
                .status(HttpStatus.CREATED.value())
                .isSuccess(true)
-               .data(citySaveResponse)
+               .data(city)
                .build();
        return ResponseEntity.ok(response);
     }

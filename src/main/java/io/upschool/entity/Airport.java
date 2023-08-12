@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "airports")
+@Table(name = "airport")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,8 +22,8 @@ public class Airport {
     @Column(name = "name" , unique = true, nullable = false , length = 30)
     private String name;
 
-    @Column(name = "code_name" , unique = true, nullable = false, length = 10)
-    private String codeName;
+    @Column(name = "iata_code" , unique = true, nullable = false, length = 5)
+    private String iataCode;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "city_id" , nullable = false)

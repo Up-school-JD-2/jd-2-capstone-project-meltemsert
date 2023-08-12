@@ -1,9 +1,13 @@
 package io.upschool.controller;
 
-import io.upschool.dto.route.RouteSaveRequest;
-import io.upschool.dto.route.RouteSaveResponse;
+import io.upschool.dto.BaseResponse;
+import io.upschool.dto.flight.FlightResponse;
+import io.upschool.dto.route.RouteRequest;
+import io.upschool.dto.route.RouteResponse;
 import io.upschool.service.RouteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +20,24 @@ public class RouteController {
     private final RouteService routeService;
 
     @GetMapping
-    public ResponseEntity<List<RouteSaveResponse>> getRoutes(){
+    public ResponseEntity<Object> getRoutes(){
        var routes= routeService.getAllRoutes();
-       return ResponseEntity.ok(routes);
+        var response= BaseResponse.<List<RouteResponse>>builder()
+                .status(HttpStatus.OK.value())
+                .isSuccess(true)
+                .data(routes)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<RouteSaveResponse> createRoute(@RequestBody RouteSaveRequest request){
-        var response=routeService.save(request);
+    public ResponseEntity<Object> createRoute(@Valid @RequestBody RouteRequest request){
+        var route=routeService.save(request);
+        var response=BaseResponse.<RouteResponse>builder()
+                .status(HttpStatus.CREATED.value())
+                .isSuccess(true)
+                .data(route)
+                .build();
         return ResponseEntity.ok(response);
     }
 }

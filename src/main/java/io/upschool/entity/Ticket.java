@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name= "tickets")
+@Table(name= "ticket")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -36,4 +36,12 @@ public class Ticket {
 
     @Enumerated(EnumType.STRING)
     private TicketStatus ticketStatus;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "payment_id" ,nullable = false)
+    private Payment payment;
+
+    @Column(name = "active")
+    @Builder.Default
+    private boolean active = Boolean.TRUE;
 }

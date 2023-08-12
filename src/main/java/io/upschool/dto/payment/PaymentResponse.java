@@ -1,5 +1,6 @@
-package io.upschool.dto.airport;
+package io.upschool.dto.payment;
 
+import io.upschool.dto.creditcard.CreditCardResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AirportSaveResponse {
+public class PaymentResponse {
     private Long id;
-    private String name;
-    private String codeName;
-    private String cityName;
+    private Long creditCardId;
 }

@@ -1,4 +1,4 @@
-package io.upschool.dto.seat;
+package io.upschool.dto.airlinecompany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SeatSaveRequest {
-    private String seatNumber;
-    private String seatType;
-    private Long airplaneId;
+public class AirlineCompanyResponse {
+    private Long id;
+    private String name;
+    private String iataCode;
 }

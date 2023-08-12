@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CitySaveRequest {
+public class CityResponse {
+    private Long id;
     private String name;
-
 }

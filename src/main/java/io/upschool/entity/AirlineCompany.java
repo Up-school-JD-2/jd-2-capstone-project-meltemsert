@@ -1,6 +1,7 @@
 package io.upschool.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,26 +9,22 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "airlinecompanies")
 @Data
+@Table(name = "airline_company")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Where(clause = "active = true" )
+@Where(clause = "active = true")
 public class AirlineCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name= "name" , unique = true, nullable = false , length = 30)
+    @Column(name = "name", unique = true, nullable = false, length = 20)
     private String name;
 
-    @Column(name = "code_name" , nullable = false, length = 10)
-    private String codeName;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "airplane_id" , nullable = false)
-    private Airplane airplane;
+    @Column(name = "iata_code", unique = true, nullable = false, length = 5)
+    private String iataCode;
 
     @Column(name = "active")
     @Builder.Default

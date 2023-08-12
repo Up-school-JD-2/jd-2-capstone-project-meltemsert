@@ -9,7 +9,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name="cities")
+@Table(name="city")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

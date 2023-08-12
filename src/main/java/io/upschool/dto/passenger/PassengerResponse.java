@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PassengerSaveRequest {
-    private String name;
-    private String surName;
+public class PassengerResponse {
+    private Long id;
+    private String nameSurname;
     private String identificationNumber;
     private String email;
     private String contactNumber;
+
 }

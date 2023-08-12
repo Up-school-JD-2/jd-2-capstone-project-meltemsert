@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RouteSaveResponse {
+public class RouteResponse {
     private Long id;
     private String routeName;
+    private String airlineCompanyName;
     private String departureAirportName;
     private String arrivalAirportName;
     private float flightTime;

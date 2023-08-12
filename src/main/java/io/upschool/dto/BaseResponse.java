@@ -17,8 +17,8 @@ public class BaseResponse <T>{
     @JsonProperty("isSuccess")
     private boolean isSuccess;
 
-    //@Builder.Default
-    private String error = "no message available.";
+    @Builder.Default
+    private String error = "Successful";
 
     private T data;
 }

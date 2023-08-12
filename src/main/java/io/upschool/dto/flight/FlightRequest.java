@@ -1,23 +1,28 @@
 package io.upschool.dto.flight;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FlightSaveResponse {
-    private Long flightId;
+public class FlightRequest {
+    @NotNull
+    private Long routeId;
+    @NotBlank
     private String flightNumber;
-    private String routeCodeName;
+    @NotNull
     private LocalDateTime departureDateAndTime;
+    @NotNull
     private LocalDateTime arrivalDateAndTime;
-    private String airlineCompanyName;
-    private int capacity;
+    @NotNull
+    private Long airlineCompanyId;
+    @NotNull
     private float price;
 }

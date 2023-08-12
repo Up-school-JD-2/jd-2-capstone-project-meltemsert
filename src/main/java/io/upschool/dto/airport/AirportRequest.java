@@ -1,7 +1,5 @@
-package io.upschool.dto.airplane;
+package io.upschool.dto.airport;
 
-import io.upschool.dto.seat.SeatSaveRequest;
-import io.upschool.entity.Seat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,17 +7,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AirplaneSaveRequest {
+public class AirportRequest {
     @NotBlank
-    private String registrationNumber;
+    private String name;
+    @NotBlank
+    private String iataCode;
     @NotNull
-    private int seatCapacity;
+    private Long cityId;
 
-    private List<SeatSaveRequest> seats;
 }

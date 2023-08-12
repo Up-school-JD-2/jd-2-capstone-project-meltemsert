@@ -1,14 +1,13 @@
 package io.upschool.service;
 
-import io.upschool.dto.flight.FlightSaveRequest;
-import io.upschool.dto.flight.FlightSaveResponse;
-import io.upschool.entity.AirlineCompany;
+import io.upschool.dto.flight.FlightRequest;
+import io.upschool.dto.flight.FlightResponse;
 import io.upschool.entity.Flight;
-import io.upschool.entity.Route;
 import io.upschool.exception.FlightAlreadySavedException;
 import io.upschool.repository.FlightRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,50 +18,60 @@ public class FlightService {
     private final FlightRepository flightRepository;
     private final RouteService routeService;
     private final AirlineCompanyService airlineCompanyService;
-    public List<FlightSaveResponse> getAllFlights(){
-        return flightRepository.findAll().stream().map(flight -> FlightSaveResponse.builder()
+    public List<FlightResponse> getAllFlights(){
+        return flightRepository.findAll().stream().map(flight -> FlightResponse.builder()
                 .flightId(flight.getId())
                 .flightNumber(flight.getFlightNumber())
-                .routeCodeName(flight.getRoute().getRouteName())
+                .routeName(flight.getRoute().getRouteName())
                 .departureDateAndTime(flight.getDepartureDateAndTime())
                 .arrivalDateAndTime(flight.getArrivalDateAndTime())
                 .airlineCompanyName(flight.getAirlineCompany().getName())
                 .capacity(flight.getCapacity())
+                .price(flight.getPrice())
                 .build()).collect(Collectors.toList());
     }
 
-    public FlightSaveResponse save(FlightSaveRequest request) {
+    @Transactional
+    public FlightResponse save(FlightRequest request) {
+
         checkIsFlightAlreadySaved(request);
-        Route routeByReference=routeService.getReferenceById(request.getRouteId());
-        AirlineCompany airlineCompanyByReference=
-                airlineCompanyService.getReferenceById(request.getAirlineCompanyId());
-        var newFlight= Flight.builder()
-                .route(routeByReference)
-                .departureDateAndTime(request.getDepartureDateAndTime())
-                .arrivalDateAndTime(request.getArrivalDateAndTime())
-                .airlineCompany(airlineCompanyByReference)
-                .price(request.getPrice())
+        Flight flightResponse = buildFlightAndSave(request);
+
+        return FlightResponse.builder()
+                .flightId(flightResponse.getId())
+                .routeName(flightResponse.getRoute().getRouteName())
+                .flightNumber(flightResponse.getFlightNumber())
+                .departureDateAndTime(flightResponse.getDepartureDateAndTime())
+                .arrivalDateAndTime(flightResponse.getArrivalDateAndTime())
+                .airlineCompanyName(flightResponse.getAirlineCompany().getName())
+                .capacity(flightResponse.getCapacity())
+                .price(flightResponse.getPrice())
                 .build();
-        Flight savedFlight=flightRepository.save(newFlight);
-        return FlightSaveResponse.builder()
-                .flightId(savedFlight.getId())
-                .routeCodeName(savedFlight.getRoute().getRouteName())
-                .departureDateAndTime(savedFlight.getDepartureDateAndTime())
-                .arrivalDateAndTime(savedFlight.getArrivalDateAndTime())
-                .airlineCompanyName(savedFlight.getAirlineCompany().getName())
-                .capacity(savedFlight.getCapacity())
-                .price(savedFlight.getPrice())
-                .build();
-    }
-    public void checkIsFlightAlreadySaved(FlightSaveRequest request){
-        boolean flightByNumber=flightRepository.existsByName(request.getFlightNumber());
-        if(flightByNumber){
-           throw new FlightAlreadySavedException("Bu uçuş daha önce eklenmiş");
-        }
     }
 
+    @Transactional(readOnly = true)
     public Flight getReferenceById(Long flightId) {
         return flightRepository.getReferenceById(flightId);
+    }
+
+    private Flight buildFlightAndSave(FlightRequest request) {
+
+        Flight flight = Flight.builder()
+                .route(routeService.getReferenceById(request.getRouteId()))
+                .flightNumber(request.getFlightNumber())
+                .departureDateAndTime(request.getDepartureDateAndTime())
+                .arrivalDateAndTime(request.getArrivalDateAndTime())
+                .airlineCompany(airlineCompanyService.getReferenceById(request.getAirlineCompanyId()))
+                .price(request.getPrice())
+                .build();
+        return flightRepository.save(flight);
+    }
+
+    private void checkIsFlightAlreadySaved(FlightRequest request){
+        boolean flightByNumber=flightRepository.existsByFlightNumber(request.getFlightNumber());
+        if(flightByNumber){
+            throw new FlightAlreadySavedException("This flight has already been registered");
+        }
     }
 }
 

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name="flights")
+@Table(name="flight")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

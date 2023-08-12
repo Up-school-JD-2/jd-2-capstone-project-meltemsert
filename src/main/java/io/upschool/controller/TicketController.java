@@ -1,9 +1,13 @@
 package io.upschool.controller;
 
-import io.upschool.dto.ticket.TicketSaveRequest;
-import io.upschool.dto.ticket.TicketSaveResponse;
+import io.upschool.dto.BaseResponse;
+import io.upschool.dto.route.RouteResponse;
+import io.upschool.dto.ticket.TicketRequest;
+import io.upschool.dto.ticket.TicketResponse;
 import io.upschool.service.TicketService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +20,24 @@ public class TicketController {
     private final TicketService ticketService;
 
     @GetMapping
-    public ResponseEntity<List<TicketSaveResponse>> getTickets(){
-       var response= ticketService.getAllTickets();
-       return ResponseEntity.ok(response);
+    public ResponseEntity<Object> getTickets(){
+       var tickets= ticketService.getAllTickets();
+        var response= BaseResponse.<List<TicketResponse>>builder()
+                .status(HttpStatus.OK.value())
+                .isSuccess(true)
+                .data(tickets)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<TicketSaveResponse> createTicket(@RequestBody TicketSaveRequest request){
-        var response= ticketService.save(request);
+    public ResponseEntity<Object> createTicket(@Valid @RequestBody TicketRequest request){
+        var ticket= ticketService.save(request);
+        var response=BaseResponse.<TicketResponse>builder()
+                .status(HttpStatus.CREATED.value())
+                .isSuccess(true)
+                .data(ticket)
+                .build();
         return ResponseEntity.ok(response);
     }
 

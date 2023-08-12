@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RouteRepository extends JpaRepository<Route,Long> {
 
-    Route findByRouteNameIgnoreCase(String name);
+    boolean existsByRouteName(String name);
 }

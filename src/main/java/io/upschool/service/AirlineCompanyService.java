@@ -1,12 +1,15 @@
 package io.upschool.service;
 
-import io.upschool.dto.airlinecompany.AirlineCompanySaveRequest;
-import io.upschool.dto.airlinecompany.AirlineCompanySaveResponse;
+import io.upschool.dto.airlinecompany.AirlineCompanyRequest;
+import io.upschool.dto.airlinecompany.AirlineCompanyResponse;
+import io.upschool.dto.creditcard.CreditCardRequest;
 import io.upschool.entity.AirlineCompany;
+import io.upschool.entity.CreditCard;
 import io.upschool.exception.AirlineCompanyAlreadySavedException;
 import io.upschool.repository.AirlineCompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,39 +19,47 @@ import java.util.stream.Collectors;
 public class AirlineCompanyService {
     private final AirlineCompanyRepository airlineCompanyRepository;
 
-    public List<AirlineCompanySaveResponse> getAllAirlineCompanies() {
+    public List<AirlineCompanyResponse> getAllAirlineCompanies() {
 
         return airlineCompanyRepository.findAll().stream().map(airlineCompany ->
-                AirlineCompanySaveResponse.builder()
+                AirlineCompanyResponse.builder()
                         .id(airlineCompany.getId())
                         .name(airlineCompany.getName())
-                        .codeName(airlineCompany.getCodeName())
+                        .iataCode(airlineCompany.getIataCode())
                         .build()).collect(Collectors.toList());
     }
 
-    public AirlineCompanySaveResponse save(AirlineCompanySaveRequest request) {
-        checkIsAirlineCompanyAlreadySaved(request);
-        var newAirlineCompany = AirlineCompany.builder()
-                .name(request.getName())
-                .codeName(request.getCodeName())
-                .build();
-        AirlineCompany savedAirlineCompany = airlineCompanyRepository.save(newAirlineCompany);
+    @Transactional
+    public AirlineCompanyResponse save(AirlineCompanyRequest request) {
 
-        return AirlineCompanySaveResponse.builder()
-                .id(savedAirlineCompany.getId())
-                .name(savedAirlineCompany.getName())
-                .codeName(savedAirlineCompany.getCodeName())
+        checkIsAirlineCompanyAlreadySaved(request);
+        AirlineCompany airlineCompanyResponse = buildCreditCardAndSave(request);
+
+        return AirlineCompanyResponse.builder()
+                .id(airlineCompanyResponse.getId())
+                .name(airlineCompanyResponse.getName())
+                .iataCode(airlineCompanyResponse.getIataCode())
                 .build();
     }
 
+    @Transactional(readOnly = true)
     public AirlineCompany getReferenceById(Long airlineCompanyId) {
         return airlineCompanyRepository.getReferenceById(airlineCompanyId);
     }
 
-    private void checkIsAirlineCompanyAlreadySaved(AirlineCompanySaveRequest request) {
+    private AirlineCompany buildCreditCardAndSave(AirlineCompanyRequest request) {
+
+        AirlineCompany airlineCompany = AirlineCompany.builder()
+                .name(request.getName())
+                .iataCode(request.getIataCode())
+                .build();
+        return airlineCompanyRepository.save(airlineCompany);
+    }
+
+    private void checkIsAirlineCompanyAlreadySaved(AirlineCompanyRequest request) {
         boolean airlineByName = airlineCompanyRepository.existsByName(request.getName());
         if (airlineByName) {
-            throw new AirlineCompanyAlreadySavedException("Bu airline company daha önce eklenmiş");
+            throw new AirlineCompanyAlreadySavedException("This airline company has already been registered");
         }
     }
 }
