@@ -1,7 +1,6 @@
 package io.upschool.controller;
 
 import io.upschool.dto.BaseResponse;
-import io.upschool.dto.flight.FlightResponse;
 import io.upschool.dto.route.RouteRequest;
 import io.upschool.dto.route.RouteResponse;
 import io.upschool.service.RouteService;

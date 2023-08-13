@@ -3,7 +3,6 @@ package io.upschool.service;
 
 import io.upschool.dto.passenger.PassengerRequest;
 import io.upschool.dto.passenger.PassengerResponse;
-import io.upschool.entity.City;
 import io.upschool.entity.Passenger;
 import io.upschool.exception.PassengerAlreadySavedException;
 import io.upschool.repository.PassengerRepository;
@@ -19,11 +18,11 @@ import java.util.stream.Collectors;
 public class PassengerService {
     private final PassengerRepository passengerRepository;
 
-    public List<PassengerResponse> getAllPassengers(){
+    public List<PassengerResponse> getAllPassengers() {
 
         return passengerRepository.findAll().stream().map(passenger -> PassengerResponse.builder()
                 .id(passenger.getId())
-                .nameSurname(passenger.getName()  + " " + passenger.getSurname())
+                .nameSurname(passenger.getName() + " " + passenger.getSurname())
                 .identificationNumber(passenger.getIdentificationNumber())
                 .email(passenger.getEmail())
                 .contactNumber(passenger.getContactNumber())
@@ -31,22 +30,35 @@ public class PassengerService {
     }
 
     @Transactional
-    public PassengerResponse save(PassengerRequest request) {
-
+    public Passenger save(PassengerRequest request){
         checkIsPassengerAlreadySaved(request);
-        Passenger passengerResponse=buildPassengerAndSave(request);
-        return PassengerResponse.builder()
-                .id(passengerResponse.getId())
-                .nameSurname(passengerResponse.getName() + " " + passengerResponse.getSurname())
-                .identificationNumber(passengerResponse.getIdentificationNumber())
-                .email(passengerResponse.getEmail())
-                .contactNumber(passengerResponse.getContactNumber())
+        Passenger passenger = Passenger.builder()
+                .identificationNumber(request.getIdentificationNumber())
+                .name(request.getName())
+                .surname(request.getSurName())
+                .email(request.getEmail())
+                .contactNumber(request.getContactNumber())
                 .build();
+        return passengerRepository.save(passenger);
+
+
     }
+    public PassengerResponse entityToResponse(Passenger passenger){
+        return PassengerResponse.builder()
+                .id(passenger.getId())
+                .nameSurname(passenger.getName() + " " + passenger.getSurname())
+                .identificationNumber(passenger.getIdentificationNumber())
+                .email(passenger.getEmail())
+                .contactNumber(passenger.getContactNumber())
+                .build();
+
+    }
+
     @Transactional(readOnly = true)
     public Passenger getReferenceById(Long passengerId) {
         return passengerRepository.getReferenceById(passengerId);
     }
+
     private Passenger buildPassengerAndSave(PassengerRequest request) {
 
         Passenger passenger = Passenger.builder()
@@ -58,10 +70,11 @@ public class PassengerService {
                 .build();
         return passengerRepository.save(passenger);
     }
-    private void checkIsPassengerAlreadySaved(PassengerRequest request){
-        boolean passengerByIdentificationNumber=
-                passengerRepository.existsByidentificationNumber(request.getIdentificationNumber());
-        if(passengerByIdentificationNumber){
+
+    private void checkIsPassengerAlreadySaved(PassengerRequest request) {
+        boolean passengerByIdentificationNumber =
+                passengerRepository.existsByIdentificationNumber(request.getIdentificationNumber());
+        if (passengerByIdentificationNumber) {
             throw new PassengerAlreadySavedException("This passenger has already been registered");
         }
     }

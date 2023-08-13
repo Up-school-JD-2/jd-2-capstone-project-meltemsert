@@ -19,9 +19,16 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "credit_card_id" , nullable = false)
-    private CreditCard creditCard;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "ticket_id")
+//    private Ticket ticket;
+
+    private String passengerNameSurname;
+
+    private Float price;
+
+    @Column (name= "credit_card_number" , nullable = false)
+    private String creditCardNumber;
 
     @Column(name = "active")
     @Builder.Default

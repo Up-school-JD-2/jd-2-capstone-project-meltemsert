@@ -1,9 +1,9 @@
 package io.upschool.service;
 
-import io.upschool.dto.creditcard.CreditCardRequest;
-import io.upschool.dto.creditcard.CreditCardResponse;
 import io.upschool.dto.payment.PaymentRequest;
 import io.upschool.dto.payment.PaymentResponse;
+import io.upschool.dto.ticket.TicketResponse;
+import io.upschool.entity.Passenger;
 import io.upschool.entity.Payment;
 import io.upschool.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,23 +13,30 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PaymentService {
     private final PaymentRepository paymentRepository;
-    private final CreditCardService creditCardService;
 
-
-    public PaymentResponse save(PaymentRequest request) {
-
-        Payment paymentResponse=buildPaymentAndSave(request);
-        return PaymentResponse.builder()
-                .id(paymentResponse.getId())
-                .creditCardId(paymentResponse.getCreditCard().getId())
+    public Payment save(PaymentRequest request , String  nameSurname ,Float price) {
+        Payment payment = Payment.builder()
+                .creditCardNumber(request.getCreditCardNumber())
+                .passengerNameSurname(nameSurname)
+                .price(price)
                 .build();
+
+        return paymentRepository.save(payment);
+
+    }
+    public PaymentResponse entityToResponse(Payment payment){
+        return PaymentResponse.builder()
+                .id(payment.getId())
+                .creditCardNumber(maskData(removeCharacters(payment.getCreditCardNumber())))
+                .build();
+
     }
 
-    private Payment buildPaymentAndSave(PaymentRequest request) {
+    private String removeCharacters(String cardNumber){
+        return  cardNumber.replaceAll("[^0-9]", "");
+    }
 
-        Payment payment=Payment.builder()
-                .creditCard(creditCardService.getReferenceById(request.getCreditCardId()))
-                .build();
-        return paymentRepository.save(payment);
+    private String maskData(String cardNumber) {
+        return cardNumber.replaceAll(".(?=.{4})", "*");
     }
 }

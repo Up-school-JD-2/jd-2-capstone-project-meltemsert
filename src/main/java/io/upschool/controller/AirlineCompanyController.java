@@ -3,7 +3,6 @@ package io.upschool.controller;
 import io.upschool.dto.BaseResponse;
 import io.upschool.dto.airlinecompany.AirlineCompanyRequest;
 import io.upschool.dto.airlinecompany.AirlineCompanyResponse;
-import io.upschool.dto.city.CityResponse;
 import io.upschool.service.AirlineCompanyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

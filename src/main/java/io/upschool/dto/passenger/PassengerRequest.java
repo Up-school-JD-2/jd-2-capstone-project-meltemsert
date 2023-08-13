@@ -14,21 +14,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class PassengerRequest {
+
     @NotBlank
-    @Size(min=3 , max= 20 , message = "İsminizi giriniz")
+    @Size(min = 3, max = 20, message = "The name must be {min} and {max} characters long!")
     private String name;
 
+
     @NotBlank
-    @Size(min=2 , max= 30 , message = "Soy isminizi giriniz")
+    @Size(min = 2, max = 30, message = "The name must be {min} and {max} characters long!")
     private String surName;
 
-    @Pattern(regexp = "\\d{11}" , message = "Geçerli bir kimlik numarası giriniz.")
+    @NotBlank
+    @Pattern(regexp = "\\d{11}", message = "Make sure that the ID number is exactly 11 digits long!")
     private String identificationNumber;
 
+
     @NotBlank
-    @Email(message = "Hatalı email girildi.")
+    @Email(message = "Make sure that  the e-mail consist of {@}!")
     private String email;
 
-    @Pattern(regexp = "\\d{10}" , message = "Geçerli bir iletişim numarası giriniz." )
+    @NotBlank
+    @Pattern(regexp = "\\d{10}", message = "Make sure that the contact number number is exactly 10 digits long!")
     private String contactNumber;
 }

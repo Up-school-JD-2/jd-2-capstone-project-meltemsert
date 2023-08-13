@@ -43,7 +43,7 @@ public class Flight {
     private int capacity=3;
 
     @Column(name= "price" , nullable = false , length = 10)
-    private float price;
+    private Float price;
 
     @Column(name = "active")
     @Builder.Default

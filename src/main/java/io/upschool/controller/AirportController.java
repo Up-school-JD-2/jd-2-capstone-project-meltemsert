@@ -1,7 +1,6 @@
 package io.upschool.controller;
 
 import io.upschool.dto.BaseResponse;
-import io.upschool.dto.airlinecompany.AirlineCompanyResponse;
 import io.upschool.dto.airport.AirportRequest;
 import io.upschool.dto.airport.AirportResponse;
 import io.upschool.service.AirportService;

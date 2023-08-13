@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -21,7 +22,8 @@ public class Ticket {
     private Long id;
 
     @Column(name = "ticket_number" , unique = true, nullable = false , length = 10)
-    private String ticketNumber;
+    @Builder.Default
+    private String ticketNumber= UUID.randomUUID().toString().substring(0,10);
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "passenger_id" , nullable = false)
@@ -32,7 +34,8 @@ public class Ticket {
     private Flight flight;
 
     @Column(name = "purchase_date_and_time" , nullable = false , length = 20)
-    private LocalDateTime purchaseDateAndTime;
+    @Builder.Default
+    private LocalDateTime purchaseDateAndTime= LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
     private TicketStatus ticketStatus;

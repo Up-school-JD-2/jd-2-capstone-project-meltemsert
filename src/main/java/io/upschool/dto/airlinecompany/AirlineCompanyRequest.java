@@ -12,11 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class AirlineCompanyRequest {
-    @NotBlank
-    @Size(min = 3, max = 30,
-            message = "The airline company name '$...' must be between {min} and {max} characters long!")
+
+    @Size(min = 5, max = 30,
+            message = "The airline company name must be {min} and {max} characters long!")
     private String name;
-    @NotBlank
-    @Size
+
+
+    @Size(min = 3, max = 3,
+            message = "The airline iata code must be between {min} and {max} characters long!")
     private String iataCode;
 }

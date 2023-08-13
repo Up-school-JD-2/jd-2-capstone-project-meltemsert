@@ -1,5 +1,9 @@
 package io.upschool.service;
 
+import io.upschool.dto.passenger.PassengerRequest;
+import io.upschool.dto.passenger.PassengerResponse;
+import io.upschool.dto.payment.PaymentRequest;
+import io.upschool.dto.payment.PaymentResponse;
 import io.upschool.dto.ticket.TicketRequest;
 import io.upschool.dto.ticket.TicketResponse;
 import io.upschool.entity.*;
@@ -18,52 +22,74 @@ public class TicketService {
     private final TicketRepository ticketRepository;
     private final FlightService flightService;
     private final PassengerService passengerService;
+    private final PaymentService paymentService;
+
 
     public List<TicketResponse> getAllTickets() {
-        return ticketRepository.findAll().stream().map(ticket -> TicketResponse.builder()
-                .id(ticket.getId())
-                .ticketNumber(ticket.getTicketNumber())
-                .purchaseDateAndTime(ticket.getPurchaseDateAndTime())
-                .ticketStatus(ticket.getTicketStatus().toString())
-                .passengerId(ticket.getPassenger().getId())
-                .nameSurname(ticket.getPassenger().getName()
-                        + " " + ticket.getPassenger().getSurname())
-                .flightId(ticket.getFlight().getId())
-                .routeName(ticket.getFlight().getRoute().getRouteName())
-                .build()).collect(Collectors.toList());
+
+        return ticketRepository.findAll().stream().map(ticket -> entityToResponse(ticket)).toList();
 
     }
 
+
     @Transactional
     public TicketResponse save(TicketRequest request) {
+        PassengerRequest passengerRequest = request.getPassengerRequest();
+        PaymentRequest paymentRequest = request.getPaymentRequest();
+        Long flightId = request.getFlightId();
+        Flight flight = flightService.getReferenceById(flightId);
+
+
+
+        Passenger passenger = passengerService.save(passengerRequest);
+        String nameSurname=passenger.getName() + " " + passenger.getSurname();
+        Float price= flight.getPrice();
+        Payment payment = paymentService.save(paymentRequest, nameSurname, price);
+
+
 
         int ticketCount = ticketRepository.countByFlightIdAndTicketStatus(request.getFlightId(), TicketStatus.COMPLETED);
         if (ticketCount >= flightService.getReferenceById(request.getFlightId()).getCapacity()) {
             throw new FlightCapacityExceededException("Tickets for this flight are sold out.");
         }
-        Ticket ticketResponse=buildTicketAndSave(request);
-        return TicketResponse.builder()
-                .id(ticketResponse.getId())
-                .ticketNumber(ticketResponse.getTicketNumber())
-                .purchaseDateAndTime(ticketResponse.getPurchaseDateAndTime())
-                .ticketStatus(ticketResponse.getTicketStatus().toString())
-                .passengerId(ticketResponse.getPassenger().getId())
-                .nameSurname(ticketResponse.getPassenger().getName()
-                        + " " + ticketResponse.getPassenger().getSurname())
-                .flightId(ticketResponse.getFlight().getId())
-                .routeName(ticketResponse.getFlight().getRoute().getRouteName())
-                .build();
-    }
-
-    private Ticket buildTicketAndSave(TicketRequest request) {
 
         Ticket ticket = Ticket.builder()
-                .ticketNumber(request.getTicketNumber())
-                .passenger(passengerService.getReferenceById(request.getPassengerId()))
-                .flight( flightService.getReferenceById(request.getFlightId()))
-                .purchaseDateAndTime(request.getPurchaseDateAndTime())
+                .payment(payment)
                 .ticketStatus(TicketStatus.valueOf(request.getTicketStatus()))
+                .passenger(passenger)
+                .flight(flight)
                 .build();
-        return ticketRepository.save(ticket);
+        Ticket savedTicket = ticketRepository.save(ticket);
+
+        return entityToResponse(savedTicket);
+
+
     }
+    public void cancelTicket(Long id){
+        Ticket ticket=ticketRepository.getReferenceById(id);
+        ticket.setTicketStatus(TicketStatus.CANCELED);
+        ticketRepository.save(ticket);
+        System.out.println("The ticket has been cancelled.");
+    }
+
+    private TicketResponse entityToResponse(Ticket ticket){
+
+        Payment payment = ticket.getPayment();
+        Passenger passenger = ticket.getPassenger();
+
+        PaymentResponse paymentResponse = paymentService.entityToResponse(payment);
+        PassengerResponse passengerResponse = passengerService.entityToResponse(passenger);
+
+        return TicketResponse.builder()
+                .ticketNumber(ticket.getTicketNumber())
+                .routeName(ticket.getFlight().getRoute().getRouteName())
+                .ticketStatus(ticket.getTicketStatus().toString())
+                .purchaseDateAndTime(ticket.getPurchaseDateAndTime())
+                .passengerResponse(passengerResponse)
+                .paymentResponse(paymentResponse)
+                .build();
+    }
+
+
+
 }

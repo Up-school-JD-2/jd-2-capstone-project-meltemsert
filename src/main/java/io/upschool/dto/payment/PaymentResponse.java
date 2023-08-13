@@ -1,6 +1,6 @@
 package io.upschool.dto.payment;
 
-import io.upschool.dto.creditcard.CreditCardResponse;
+import io.upschool.dto.ticket.TicketResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PaymentResponse {
     private Long id;
-    private Long creditCardId;
-}
+    private String creditCardNumber;}
+
+

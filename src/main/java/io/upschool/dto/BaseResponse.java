@@ -18,7 +18,7 @@ public class BaseResponse <T>{
     private boolean isSuccess;
 
     @Builder.Default
-    private String error = "Successful";
+    private String error = "no message available.";
 
     private T data;
 }

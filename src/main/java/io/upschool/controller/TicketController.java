@@ -1,7 +1,6 @@
 package io.upschool.controller;
 
 import io.upschool.dto.BaseResponse;
-import io.upschool.dto.route.RouteResponse;
 import io.upschool.dto.ticket.TicketRequest;
 import io.upschool.dto.ticket.TicketResponse;
 import io.upschool.service.TicketService;
@@ -40,5 +39,11 @@ public class TicketController {
                 .build();
         return ResponseEntity.ok(response);
     }
+
+    @PutMapping("/{id}")
+    public void deleteTicket(@PathVariable("id") Long id){
+        ticketService.cancelTicket(id);
+    }
+
 
 }

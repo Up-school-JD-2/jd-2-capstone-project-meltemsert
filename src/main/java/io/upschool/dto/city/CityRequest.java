@@ -1,6 +1,7 @@
 package io.upschool.dto.city;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CityRequest {
-    @NotBlank (message = "Şehir adı giriniz.")
+
+    @NotBlank
+ //   @Size(min = 3, max = 20,
+//            message = "The city name must be {min} and {max} characters long!")
     private String name;
 
 }

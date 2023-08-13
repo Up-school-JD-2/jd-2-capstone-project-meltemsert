@@ -2,9 +2,7 @@ package io.upschool.service;
 
 import io.upschool.dto.airlinecompany.AirlineCompanyRequest;
 import io.upschool.dto.airlinecompany.AirlineCompanyResponse;
-import io.upschool.dto.creditcard.CreditCardRequest;
 import io.upschool.entity.AirlineCompany;
-import io.upschool.entity.CreditCard;
 import io.upschool.exception.AirlineCompanyAlreadySavedException;
 import io.upschool.repository.AirlineCompanyRepository;
 import lombok.RequiredArgsConstructor;
