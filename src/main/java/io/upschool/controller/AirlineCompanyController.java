@@ -3,6 +3,7 @@ package io.upschool.controller;
 import io.upschool.dto.BaseResponse;
 import io.upschool.dto.airlinecompany.AirlineCompanyRequest;
 import io.upschool.dto.airlinecompany.AirlineCompanyResponse;
+import io.upschool.dto.airlinecompany.AirlineCompanySearchRequest;
 import io.upschool.service.AirlineCompanyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,10 @@ public class AirlineCompanyController {
     private final AirlineCompanyService airlineCompanyService;
 
     @GetMapping
-    public ResponseEntity<Object> getAirlineCompanies(){
+    public ResponseEntity<Object> getAirlineCompanies() {
+        List<AirlineCompanyResponse> airlineCompanies = airlineCompanyService.getAllAirlineCompanies();
 
-        var airlineCompanies=airlineCompanyService.getAllAirlineCompanies();
-        var response= BaseResponse.<List<AirlineCompanyResponse>>builder()
+        BaseResponse response = BaseResponse.<List<AirlineCompanyResponse>>builder()
                 .status(HttpStatus.OK.value())
                 .isSuccess(true)
                 .data(airlineCompanies)
@@ -31,11 +32,23 @@ public class AirlineCompanyController {
 
     }
 
-    @PostMapping
-    public ResponseEntity<Object> createAirlineCompany(@Valid @RequestBody AirlineCompanyRequest request){
+    @GetMapping("/search")
+    public ResponseEntity<Object> searchAirlineCompany(AirlineCompanySearchRequest request) {
+        List<AirlineCompanyResponse> airlineCompanies = airlineCompanyService.search(request);
 
-        var airlineCompany=airlineCompanyService.save(request);
-        var response= BaseResponse.<AirlineCompanyResponse>builder()
+        BaseResponse response = BaseResponse.<List<AirlineCompanyResponse>>builder()
+                .status(HttpStatus.OK.value())
+                .isSuccess(true)
+                .data(airlineCompanies)
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> createAirlineCompany(@Valid @RequestBody AirlineCompanyRequest request) {
+        AirlineCompanyResponse airlineCompany = airlineCompanyService.save(request);
+
+        BaseResponse response = BaseResponse.<AirlineCompanyResponse>builder()
                 .status(HttpStatus.OK.value())
                 .isSuccess(true)
                 .data(airlineCompany)

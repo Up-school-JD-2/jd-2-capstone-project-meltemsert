@@ -3,6 +3,7 @@ package io.upschool.controller;
 import io.upschool.dto.BaseResponse;
 import io.upschool.dto.route.RouteRequest;
 import io.upschool.dto.route.RouteResponse;
+import io.upschool.dto.route.RouteSearchRequest;
 import io.upschool.service.RouteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,10 @@ public class RouteController {
     private final RouteService routeService;
 
     @GetMapping
-    public ResponseEntity<Object> getRoutes(){
-       var routes= routeService.getAllRoutes();
-        var response= BaseResponse.<List<RouteResponse>>builder()
+    public ResponseEntity<Object> getRoutes() {
+        List<RouteResponse> routes = routeService.getAllRoutes();
+
+        BaseResponse response = BaseResponse.<List<RouteResponse>>builder()
                 .status(HttpStatus.OK.value())
                 .isSuccess(true)
                 .data(routes)
@@ -29,10 +31,25 @@ public class RouteController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping(value= "/search")
+    public ResponseEntity<Object> searchRoute(@RequestParam RouteSearchRequest request) {
+        List<RouteResponse> routes = routeService.search(request);
+
+        BaseResponse response = BaseResponse.<List<RouteResponse>>builder()
+                .status(HttpStatus.OK.value())
+                .isSuccess(true)
+                .data(routes)
+                .build();
+        return ResponseEntity.ok(response);
+
+    }
+
+
     @PostMapping
-    public ResponseEntity<Object> createRoute(@Valid @RequestBody RouteRequest request){
-        var route=routeService.save(request);
-        var response=BaseResponse.<RouteResponse>builder()
+    public ResponseEntity<Object> createRoute(@Valid @RequestBody RouteRequest request) {
+        RouteResponse route = routeService.save(request);
+
+        BaseResponse response = BaseResponse.<RouteResponse>builder()
                 .status(HttpStatus.CREATED.value())
                 .isSuccess(true)
                 .data(route)

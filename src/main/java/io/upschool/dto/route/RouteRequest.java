@@ -1,6 +1,5 @@
 package io.upschool.dto.route;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RouteRequest {
 
-    @Size (min = 10, max = 50,
+    @Size (min = 10, max = 70,
             message = "The route name must be {min} and {max} characters long!")
     private String routeName;
 

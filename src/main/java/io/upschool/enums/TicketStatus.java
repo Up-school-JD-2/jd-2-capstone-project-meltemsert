@@ -1,4 +1,4 @@
-package io.upschool.entity;
+package io.upschool.enums;
 
 public enum TicketStatus {
     CANCELED,

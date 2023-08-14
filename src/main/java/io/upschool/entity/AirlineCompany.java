@@ -1,7 +1,6 @@
 package io.upschool.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +27,7 @@ public class AirlineCompany {
 
     @Column(name = "active")
     @Builder.Default
-    private boolean active = Boolean.TRUE;
+    private Boolean active = Boolean.TRUE;
 
 
 }

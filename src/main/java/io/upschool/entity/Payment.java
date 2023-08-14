@@ -19,19 +19,17 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "ticket_id")
-//    private Ticket ticket;
-
+    @Column (name= "passenger_name_surname", nullable = false, length = 50)
     private String passengerNameSurname;
 
+    @Column (name= "price", nullable = false, length = 10)
     private Float price;
 
-    @Column (name= "credit_card_number" , nullable = false)
+    @Column (name= "credit_card_number", nullable = false, length = 16)
     private String creditCardNumber;
 
     @Column(name = "active")
     @Builder.Default
-    private boolean active = Boolean.TRUE;
+    private Boolean active = Boolean.TRUE;
 
 }

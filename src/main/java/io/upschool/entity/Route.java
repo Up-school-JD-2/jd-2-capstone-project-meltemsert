@@ -19,25 +19,25 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name= "route_name", unique = true, nullable = false , length = 50)
+    @Column(name= "route_name", unique = true, nullable = false, length = 70)
     private String routeName;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "departure_airport_id" , nullable = false)
+    @JoinColumn(name= "departure_airport_id", nullable = false)
     private Airport departureAirport;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "airline_company_id" , nullable = false)
+    @JoinColumn(name= "airline_company_id", nullable = false)
     private AirlineCompany airlineCompany;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "arrival_airport_id" , nullable = false)
+    @JoinColumn(name= "arrival_airport_id", nullable = false)
     private Airport arrivalAirport;
 
-    @Column(name= "flight_time", nullable = false , length = 5)
-    private float flightTime;
+    @Column(name= "flight_time", nullable = false, length = 5)
+    private Float flightTime;
 
     @Column(name = "active")
     @Builder.Default
-    private boolean active = Boolean.TRUE;
+    private Boolean active = Boolean.TRUE;
 }

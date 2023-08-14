@@ -19,17 +19,17 @@ public class Airport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name" , unique = true, nullable = false , length = 30)
+    @Column(name = "name", unique = true, nullable = false, length = 30)
     private String name;
 
-    @Column(name = "iata_code" , unique = true, nullable = false, length = 5)
+    @Column(name = "iata_code", unique = true, nullable = false, length = 5)
     private String iataCode;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "city_id" , nullable = false)
+    @JoinColumn(name= "city_id", nullable = false)
     private City city;
 
     @Column(name = "active")
     @Builder.Default
-    private boolean active = Boolean.TRUE;
+    private Boolean active = Boolean.TRUE;
 }

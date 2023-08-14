@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,22 +18,21 @@ public class CityService {
     private final CityRepository cityRepository;
 
     public List<CityResponse> getAllCities() {
-
-        return cityRepository.findAll().stream().map(city -> CityResponse.builder()
-                .id(city.getId())
-                .name(city.getName())
-                .build()).collect(Collectors.toList());
+        return cityRepository.findAll().stream().map(city -> entityToResponse(city)).toList();
     }
 
     @Transactional
     public CityResponse save(CityRequest request) {
-
         checkIsCityAlreadySaved(request);
-        City cityResponse = buildCityAndSave(request);
-        return CityResponse.builder()
-                .id(cityResponse.getId())
-                .name(cityResponse.getName())
+
+        City city = City.builder()
+                .name(request.getName())
                 .build();
+
+        City savedCity = cityRepository.save(city);
+
+        return entityToResponse(savedCity);
+
     }
 
     public City getCityById(Long id) {
@@ -46,16 +44,15 @@ public class CityService {
         return cityRepository.getReferenceById(id);
     }
 
-    private City buildCityAndSave(CityRequest request) {
-
-        City city = City.builder()
-                .name(request.getName())
+    public CityResponse entityToResponse(City city) {
+        return CityResponse.builder()
+                .id(city.getId())
+                .name(city.getName())
                 .build();
-        return cityRepository.save(city);
+
     }
 
     private void checkIsCityAlreadySaved(CityRequest request) {
-
         boolean cityByName = cityRepository.existsByName(request.getName());
         if (cityByName) {
             throw new CityAlreadySavedException("This city has already been registered");

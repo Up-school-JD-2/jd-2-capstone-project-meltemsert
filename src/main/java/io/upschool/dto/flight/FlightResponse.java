@@ -1,6 +1,5 @@
 package io.upschool.dto.flight;
 
-import io.upschool.dto.route.RouteResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

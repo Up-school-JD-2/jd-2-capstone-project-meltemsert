@@ -1,5 +1,6 @@
 package io.upschool.entity;
 
+import io.upschool.enums.TicketStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,19 +22,19 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ticket_number" , unique = true, nullable = false , length = 10)
+    @Column(name = "ticket_number", unique = true, nullable = false, length = 10)
     @Builder.Default
     private String ticketNumber= UUID.randomUUID().toString().substring(0,10);
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "passenger_id" , nullable = false)
+    @JoinColumn(name= "passenger_id", nullable = false)
     private Passenger passenger;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "flight_id" , nullable = false)
+    @JoinColumn(name= "flight_id", nullable = false)
     private Flight flight;
 
-    @Column(name = "purchase_date_and_time" , nullable = false , length = 20)
+    @Column(name = "purchase_date_and_time", nullable = false, length = 20)
     @Builder.Default
     private LocalDateTime purchaseDateAndTime= LocalDateTime.now();
 
@@ -41,10 +42,10 @@ public class Ticket {
     private TicketStatus ticketStatus;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "payment_id" ,nullable = false)
+    @JoinColumn(name = "payment_id", nullable = false)
     private Payment payment;
 
     @Column(name = "active")
     @Builder.Default
-    private boolean active = Boolean.TRUE;
+    private Boolean active = Boolean.TRUE;
 }

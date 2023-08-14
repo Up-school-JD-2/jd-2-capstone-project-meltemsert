@@ -6,7 +6,11 @@ import io.upschool.dto.payment.PaymentRequest;
 import io.upschool.dto.payment.PaymentResponse;
 import io.upschool.dto.ticket.TicketRequest;
 import io.upschool.dto.ticket.TicketResponse;
-import io.upschool.entity.*;
+import io.upschool.entity.Flight;
+import io.upschool.entity.Passenger;
+import io.upschool.entity.Payment;
+import io.upschool.entity.Ticket;
+import io.upschool.enums.TicketStatus;
 import io.upschool.exception.FlightCapacityExceededException;
 import io.upschool.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,29 +27,23 @@ public class TicketService {
     private final PassengerService passengerService;
     private final PaymentService paymentService;
 
-
     public List<TicketResponse> getAllTickets() {
-
         return ticketRepository.findAll().stream().map(ticket -> entityToResponse(ticket)).toList();
-
     }
-
 
     @Transactional
     public TicketResponse save(TicketRequest request) {
         PassengerRequest passengerRequest = request.getPassengerRequest();
         PaymentRequest paymentRequest = request.getPaymentRequest();
+
         Long flightId = request.getFlightId();
         Flight flight = flightService.getReferenceById(flightId);
 
-
-
         Passenger passenger = passengerService.save(passengerRequest);
-        String nameSurname=passenger.getName() + " " + passenger.getSurname();
-        Float price= flight.getPrice();
+        String nameSurname = passenger.getName() + " " + passenger.getSurname();
+
+        Float price = flight.getPrice();
         Payment payment = paymentService.save(paymentRequest, nameSurname, price);
-
-
 
         int ticketCount = ticketRepository.countByFlightIdAndTicketStatus(request.getFlightId(), TicketStatus.COMPLETED);
         if (ticketCount >= flightService.getReferenceById(request.getFlightId()).getCapacity()) {
@@ -62,18 +59,15 @@ public class TicketService {
         Ticket savedTicket = ticketRepository.save(ticket);
 
         return entityToResponse(savedTicket);
-
-
     }
-    public void cancelTicket(Long id){
-        Ticket ticket=ticketRepository.getReferenceById(id);
+
+    public void cancelTicket(Long id) {
+        Ticket ticket = ticketRepository.getReferenceById(id);
         ticket.setTicketStatus(TicketStatus.CANCELED);
         ticketRepository.save(ticket);
-        System.out.println("The ticket has been cancelled.");
     }
 
-    private TicketResponse entityToResponse(Ticket ticket){
-
+    public TicketResponse entityToResponse(Ticket ticket) {
         Payment payment = ticket.getPayment();
         Passenger passenger = ticket.getPassenger();
 
@@ -90,6 +84,9 @@ public class TicketService {
                 .build();
     }
 
-
+    public TicketResponse searchTicket(String ticketNumber) {
+        Ticket ticket = ticketRepository.findByTicketNumber(ticketNumber);
+        return entityToResponse(ticket);
+    }
 
 }
