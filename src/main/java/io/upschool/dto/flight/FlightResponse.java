@@ -18,6 +18,6 @@ public class FlightResponse {
     private LocalDateTime departureDateAndTime;
     private LocalDateTime arrivalDateAndTime;
     private String airlineCompanyName;
-    private int capacity;
-    private float price;
+    private Integer capacity;
+    private Float price;
 }

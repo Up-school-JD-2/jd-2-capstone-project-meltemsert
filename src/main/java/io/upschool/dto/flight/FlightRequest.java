@@ -33,5 +33,5 @@ public class FlightRequest {
     private Long airlineCompanyId;
 
     @NotNull(message = "Make sure that the price is correctly and not blank!")
-    private float price;
+    private Float price;
 }

@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 public class RouteResponse {
     private Long id;
     private String routeName;
-    private String airlineCompanyName;
     private String departureAirportName;
     private String arrivalAirportName;
-    private float flightTime;
+
 }

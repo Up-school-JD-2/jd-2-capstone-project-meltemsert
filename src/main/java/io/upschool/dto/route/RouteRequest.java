@@ -17,15 +17,11 @@ public class RouteRequest {
             message = "The route name must be {min} and {max} characters long!")
     private String routeName;
 
-    @NotNull (message = "Make sure that the airline company id correctly and not blank!")
-    private Long airlineCompanyId;
-
     @NotNull (message = "Make sure that the departure airport id correctly and not blank!")
     private Long departureAirportId;
 
     @NotNull (message = "Make sure that the arrival airport id correctly and not blank!")
     private Long arrivalAirportId;
 
-    @NotNull (message = "Make sure that the flight time correctly and not blank!")
-    private float flightTime;
+
 }

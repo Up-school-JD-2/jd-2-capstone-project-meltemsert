@@ -3,7 +3,6 @@ package io.upschool.service;
 import io.upschool.dto.route.RouteRequest;
 import io.upschool.dto.route.RouteResponse;
 import io.upschool.dto.route.RouteSearchRequest;
-import io.upschool.entity.AirlineCompany;
 import io.upschool.entity.Airport;
 import io.upschool.entity.Route;
 import io.upschool.exception.RouteAlreadySavedException;
@@ -33,10 +32,8 @@ public class RouteService {
 
         Route route = Route.builder()
                 .routeName(request.getRouteName())
-                .airlineCompany(airlineCompanyService.getReferenceById(request.getAirlineCompanyId()))
                 .departureAirport(airportService.getReferenceById(request.getDepartureAirportId()))
                 .arrivalAirport(airportService.getReferenceById(request.getArrivalAirportId()))
-                .flightTime(request.getFlightTime())
                 .build();
         Route savedRoute = routeRepository.save(route);
 
@@ -52,10 +49,8 @@ public class RouteService {
         return RouteResponse.builder()
                 .id(route.getId())
                 .routeName(route.getRouteName())
-                .airlineCompanyName(route.getAirlineCompany().getName())
                 .departureAirportName(route.getDepartureAirport().getName())
                 .arrivalAirportName(route.getArrivalAirport().getName())
-                .flightTime(route.getFlightTime())
                 .build();
     }
 
@@ -80,13 +75,6 @@ public class RouteService {
                     .name(request.getArrival().getName())
                     .build();
             routeBuilder.arrivalAirport(arrivalAirport);
-        }
-        if (request.getAirline() != null) {
-            AirlineCompany airlineCompany = AirlineCompany.builder()
-                    .name(request.getAirline().getName())
-                    .iataCode(request.getAirline().getIataCode())
-                    .build();
-            routeBuilder.airlineCompany(airlineCompany);
         }
         if (request.getRouteName() != null) {
             routeBuilder.routeName(request.getRouteName());

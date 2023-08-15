@@ -8,6 +8,7 @@ import io.upschool.service.RouteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,8 @@ public class RouteController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value= "/search")
-    public ResponseEntity<Object> searchRoute(@RequestParam RouteSearchRequest request) {
+    @GetMapping(value = "/search" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> searchRoute(@RequestBody RouteSearchRequest request) {
         List<RouteResponse> routes = routeService.search(request);
 
         BaseResponse response = BaseResponse.<List<RouteResponse>>builder()
@@ -43,7 +44,6 @@ public class RouteController {
         return ResponseEntity.ok(response);
 
     }
-
 
     @PostMapping
     public ResponseEntity<Object> createRoute(@Valid @RequestBody RouteRequest request) {

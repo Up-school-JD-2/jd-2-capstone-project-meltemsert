@@ -1,0 +1,2469 @@
+{
+	"info": {
+		"_postman_id": "cc94c70f-858d-4cc1-abf7-bf4dcb96715f",
+		"name": "airline_ticketing_system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23144269"
+	},
+	"item": [
+		{
+			"name": "AİRPORT",
+			"item": [
+				{
+					"name": "SAVE AIRPORT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Zonguldak Havalimanı\",\r\n    \"iataCode\": \"ONQ\",\r\n    \"cityId\": \"20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airports",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airports"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "blank iata code",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Zonguldak Havalimanı\",\r\n    \"iataCode\": \"\",\r\n    \"cityId\": 7\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Aug 2023 08:18:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"The airport iata code must be between 3 and 3 characters long!\"\n]"
+						},
+						{
+							"name": "blank name",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\",\r\n    \"iataCode\": \"ONQ\",\r\n    \"cityId\": 7\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Aug 2023 08:18:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"The airport name must be 13 and 50 characters long!\"\n]"
+						},
+						{
+							"name": "registered exception",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Zonguldak Havalimanı\",\r\n    \"iataCode\": \"ONQ\",\r\n    \"cityId\": 7\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Aug 2023 08:20:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"error\": \"This airport has already been registered.\",\n    \"data\": null,\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "long for column excp.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Balıkesir Havalimanı\",\r\n    \"iataCode\": \"EDO\",\r\n    \"cityId\": \"4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 16:42:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"error\": \"could not execute statement [Data truncation: Data too long for column 'name' at row 1] [insert into airport (active,city_id,iata_code,name) values (?,?,?,?)]; SQL [insert into airport (active,city_id,iata_code,name) values (?,?,?,?)]\",\n    \"data\": null,\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "save airport",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"İstanbul Havalimanı\",\r\n    \"iataCode\": \"IST\",\r\n    \"cityId\": \"12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 16:52:07 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"id\": 12,\n        \"name\": \"İstanbul Havalimanı\",\n        \"iataCode\": \"IST\",\n        \"cityName\": \"İSTANBUL\"\n    },\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "save airport",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Sinop Havalimanı\",\r\n    \"iataCode\": \"NOP\",\r\n    \"cityId\": \"17\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 16:57:21 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"id\": 18,\n        \"name\": \"Sinop Havalimanı\",\n        \"iataCode\": \"NOP\",\n        \"cityName\": \"SİNOP\"\n    },\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "GET ALL AIRPORT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airports",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airports"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get_all_airport",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 18:08:35 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Şakirpaşa Havalimanı\",\n            \"iataCode\": \"ADA\",\n            \"cityName\": \"ADANA\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Ankara Esenboğa Havalimanı\",\n            \"iataCode\": \"ESB\",\n            \"cityName\": \"ANKARA\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Antalya Havalimanı\",\n            \"iataCode\": \"AYT\",\n            \"cityName\": \"ANTALYA\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Balıkesir Havalimanı\",\n            \"iataCode\": \"EDO\",\n            \"cityName\": \"BALIKESİR\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Bursa Yenişehir Havalimanı\",\n            \"iataCode\": \"YEI\",\n            \"cityName\": \"BURSA\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Çanakkale Havalimanı\",\n            \"iataCode\": \"CKZ\",\n            \"cityName\": \"ÇANAKKALE\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Denizli Çardak Havalimanı\",\n            \"iataCode\": \"DNZ\",\n            \"cityName\": \"DENİZLİ\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Diyarbakır Havalimanı\",\n            \"iataCode\": \"DIY\",\n            \"cityName\": \"DİYARBAKIR\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Hasan Polatkan Havalimanı\",\n            \"iataCode\": \"AOE\",\n            \"cityName\": \"ESKİŞEHİR\"\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Gaziantep Havalimanı\",\n            \"iataCode\": \"GZT\",\n            \"cityName\": \"GAZİANTEP\"\n        },\n        {\n            \"id\": 11,\n            \"name\": \"Hatay Havalimanı\",\n            \"iataCode\": \"HTY\",\n            \"cityName\": \"HATAY\"\n        },\n        {\n            \"id\": 12,\n            \"name\": \"İstanbul Havalimanı\",\n            \"iataCode\": \"IST\",\n            \"cityName\": \"İSTANBUL\"\n        },\n        {\n            \"id\": 13,\n            \"name\": \"Sabiha Gökçen Havalimanı\",\n            \"iataCode\": \"SAW\",\n            \"cityName\": \"İSTANBUL\"\n        },\n        {\n            \"id\": 14,\n            \"name\": \"Adnan Menderes Havalimanı\",\n            \"iataCode\": \"ADB\",\n            \"cityName\": \"İZMİR\"\n        },\n        {\n            \"id\": 15,\n            \"name\": \"Konya Havalimanı\",\n            \"iataCode\": \"KYA\",\n            \"cityName\": \"KONYA\"\n        },\n        {\n            \"id\": 16,\n            \"name\": \"Dalaman Havalimanı\",\n            \"iataCode\": \"DLM\",\n            \"cityName\": \"MUĞLA\"\n        },\n        {\n            \"id\": 17,\n            \"name\": \"Nevşehir Kapadokya Havalimanı\",\n            \"iataCode\": \"NAV\",\n            \"cityName\": \"NEVŞEHİR\"\n        },\n        {\n            \"id\": 18,\n            \"name\": \"Sinop Havalimanı\",\n            \"iataCode\": \"NOP\",\n            \"cityName\": \"SİNOP\"\n        },\n        {\n            \"id\": 19,\n            \"name\": \"Trabzon  Havalimanı\",\n            \"iataCode\": \"TZX\",\n            \"cityName\": \"TRABZON\"\n        },\n        {\n            \"id\": 20,\n            \"name\": \"Van Ferit Melen Havalimanı\",\n            \"iataCode\": \"VAN\",\n            \"cityName\": \"VAN\"\n        },\n        {\n            \"id\": 21,\n            \"name\": \"Zonguldak Havalimanı\",\n            \"iataCode\": \"ONQ\",\n            \"cityName\": \"ZONGULDAK\"\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "SEARCH",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "SEARCH NAME",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"\" ,\r\n    \"iataCode\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports/search?name=İst",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "İst"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 18:18:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"id\": 12,\n            \"name\": \"İstanbul Havalimanı\",\n            \"iataCode\": \"IST\",\n            \"cityName\": \"İSTANBUL\"\n        }\n    ],\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "SEARCH NAME",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"\" ,\r\n    \"iataCode\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airports/search?name=AD",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airports",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "AD"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 18:21:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"id\": 14,\n            \"name\": \"Adnan Menderes Havalimanı\",\n            \"iataCode\": \"ADB\",\n            \"cityName\": \"İZMİR\"\n        },\n        {\n            \"id\": 17,\n            \"name\": \"Nevşehir Kapadokya Havalimanı\",\n            \"iataCode\": \"NAV\",\n            \"cityName\": \"NEVŞEHİR\"\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "AİRLİNECOMPANY",
+			"item": [
+				{
+					"name": "SAVE AIRLINECOMPANY",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Türk Hava Yolları\",\r\n    \"iataCode\": \"THY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airlinecompanies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airlinecompanies"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registered excep.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Türk Hava Yolları\" ,\r\n    \"codeName\" : \"asb\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airlinecompanies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airlinecompanies"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 05 Aug 2023 19:35:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"error\": \"Bu airline company daha önce eklenmiş\",\n    \"data\": null,\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "blank excep.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Türk Hava Yolları\" ,\r\n    \"iataCode\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airlinecompanies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airlinecompanies"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Aug 2023 08:41:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"The airline iata code must be between 3 and 3 characters long!\"\n]"
+						},
+						{
+							"name": "blank excep.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"\" ,\r\n    \"iataCode\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airlinecompanies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airlinecompanies"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Aug 2023 08:41:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"The airline company name must be 5 and 30 characters long!\",\n    \"The airline iata code must be between 3 and 3 characters long!\"\n]"
+						},
+						{
+							"name": "save airlinecompany",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Türk Hava Yolları\",\r\n    \"iataCode\": \"THY\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airlinecompanies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airlinecompanies"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:06:35 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"id\": 4,\n        \"name\": \"Türk Hava Yolları\",\n        \"iataCode\": \"THY\"\n    },\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "iata code excep.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Onur Air\",\r\n    \"iataCode\": \"OHYY\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airlinecompanies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airlinecompanies"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 22:02:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"The airline iata code must be between 3 and 3 characters long!\"\n]"
+						}
+					]
+				},
+				{
+					"name": "GET AIRLINE COMPANİES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/airlinecompanies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airlinecompanies"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get_airline_companies",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/airlinecompanies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airlinecompanies"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Aug 2023 08:43:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"Successful\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"AnadoluJet\",\n            \"iataCode\": \"AJA\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Pegasus Hava Yolları\",\n            \"iataCode\": \"PGT\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"SunExpress\",\n            \"iataCode\": \"SXS\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Türk Hava Yolları\",\n            \"iataCode\": \"THY\"\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "SEARCH",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "SEARCH NAME",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\",\r\n    \"iataCode\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/airlinecompanies/search?name=T",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"airlinecompanies",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "T"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 18:26:41 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"AnadoluJet\",\n            \"iataCode\": \"AJA\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Türk Hava Yolları\",\n            \"iataCode\": \"THY\"\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CİTY",
+			"item": [
+				{
+					"name": "get cities",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/cities",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"cities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get cities",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/cities",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"cities"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 16:36:59 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"ADANA\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"ANKARA\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"ANTALYA\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"BALIKESİR\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"BURSA\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"ÇANAKKALE\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"DENİZLİ\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"DİYARBAKIR\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"ESKİŞEHİR\"\n        },\n        {\n            \"id\": 10,\n            \"name\": \"GAZİANTEP\"\n        },\n        {\n            \"id\": 11,\n            \"name\": \"HATAY\"\n        },\n        {\n            \"id\": 12,\n            \"name\": \"İSTANBUL\"\n        },\n        {\n            \"id\": 13,\n            \"name\": \"İZMİR\"\n        },\n        {\n            \"id\": 14,\n            \"name\": \"KONYA\"\n        },\n        {\n            \"id\": 15,\n            \"name\": \"MUĞLA\"\n        },\n        {\n            \"id\": 16,\n            \"name\": \"NEVŞEHİR\"\n        },\n        {\n            \"id\": 17,\n            \"name\": \"SİNOP\"\n        },\n        {\n            \"id\": 18,\n            \"name\": \"TRABZON\"\n        },\n        {\n            \"id\": 19,\n            \"name\": \"VAN\"\n        },\n        {\n            \"id\": 20,\n            \"name\": \"ZONGULDAK\"\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "save city",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ZONGULDAK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/cities",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"cities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "blank name",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/cities",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"cities"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Aug 2023 09:12:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"The city name must be 3 and 20 characters long!\"\n]"
+						},
+						{
+							"name": "save city",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"ZONGULDAK\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/cities",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"cities"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 16:36:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"id\": 20,\n        \"name\": \"ZONGULDAK\"\n    },\n    \"isSuccess\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "FLİGHT",
+			"item": [
+				{
+					"name": "SAVE FLIGHT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"routeId\": 3,\r\n    \"flightNumber\": \"PGT123\",\r\n    \"departureDateAndTime\": \"2023-08-20T10:50:45\",\r\n    \"arrivalDateAndTime\": \"2023-08-20T12:50:45\",\r\n    \"airlineCompanyId\": 2,\r\n    \"price\": 1800\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/flights",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"flights"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "BLANK EXCEPTİON",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeId\": 3,\r\n    \"flightNumber\": \"\",\r\n    \"departureDateAndTime\": \"2023-08-15T14:30:45\",\r\n    \"arrivalDateAndTime\": \"2023-08-15T15:30:45\",\r\n    \"airlineCompanyId\": 2,\r\n    \"price\": 589.99\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/flights",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"flights"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:23:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"The flight number must be 5 and 10 characters long!\"\n]"
+						},
+						{
+							"name": "SAVE FLIGHT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeId\": 2,\r\n    \"flightNumber\": \"THY456\",\r\n    \"departureDateAndTime\": \"2023-08-20T14:30:45\",\r\n    \"arrivalDateAndTime\": \"2023-08-20T15:30:45\",\r\n    \"airlineCompanyId\": 4,\r\n    \"price\": 1000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/flights",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"flights"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:25:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"flightId\": 2,\n        \"routeName\": \"SAW İstanbul Havalimanı - NOP Sinop Havalimanı\",\n        \"flightNumber\": \"THY456\",\n        \"departureDateAndTime\": \"2023-08-20T14:30:45\",\n        \"arrivalDateAndTime\": \"2023-08-20T15:30:45\",\n        \"airlineCompanyName\": \"Türk Hava Yolları\",\n        \"capacity\": 3,\n        \"price\": 1000\n    },\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "SAVE FLIGHT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeId\": 2,\r\n    \"flightNumber\": \"TK123\",\r\n    \"departureDateAndTime\": \"2023-08-25T10:50:45\",\r\n    \"arrivalDateAndTime\": \"2023-08-25T12:50:45\",\r\n    \"airlineCompanyId\": 4,\r\n    \"price\": 1500\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/flights",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"flights"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 07:24:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"flightId\": 1,\n        \"routeName\": \"SAW Sabiha Gökçen Havalimanı - NOP Sinop Havalimanı\",\n        \"flightNumber\": \"TK123\",\n        \"departureDateAndTime\": \"2023-08-25T10:50:45\",\n        \"arrivalDateAndTime\": \"2023-08-25T12:50:45\",\n        \"airlineCompanyName\": \"Türk Hava Yolları\",\n        \"capacity\": 3,\n        \"price\": 1500\n    },\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "GET FLİGHTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/flights",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"flights"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET FLİGHTS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/flights",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"flights"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 07:32:35 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"flightId\": 1,\n            \"routeName\": \"SAW Sabiha Gökçen Havalimanı - NOP Sinop Havalimanı\",\n            \"flightNumber\": \"THY123\",\n            \"departureDateAndTime\": \"2023-08-25T10:50:45\",\n            \"arrivalDateAndTime\": \"2023-08-25T12:50:45\",\n            \"airlineCompanyName\": \"Türk Hava Yolları\",\n            \"capacity\": 3,\n            \"price\": 1500\n        },\n        {\n            \"flightId\": 2,\n            \"routeName\": \"IST İstanbul Havalimanı- ESB Ankara Esenboğa Havalimanı\",\n            \"flightNumber\": \"AJA456\",\n            \"departureDateAndTime\": \"2023-08-25T10:50:45\",\n            \"arrivalDateAndTime\": \"2023-08-25T12:50:45\",\n            \"airlineCompanyName\": \"AnadoluJet\",\n            \"capacity\": 3,\n            \"price\": 1000\n        },\n        {\n            \"flightId\": 3,\n            \"routeName\": \"DIY Diyarbakır Havalimanı - KYA Konya Havalimanı\",\n            \"flightNumber\": \"PGT123\",\n            \"departureDateAndTime\": \"2023-08-20T10:50:45\",\n            \"arrivalDateAndTime\": \"2023-08-20T12:50:45\",\n            \"airlineCompanyName\": \"Pegasus Hava Yolları\",\n            \"capacity\": 3,\n            \"price\": 1800\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "SEARCH",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "SEARCH ROUTE NAME",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"route\" : {\r\n        \"routeName\" : \"anka\" \r\n    }, \"airlineCompany\" : {\r\n        \"name\" : \"\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/flights/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"flights",
+										"search"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 19:24:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"flightId\": 1,\n            \"routeName\": \"ESB Ankara Havalimanı - KYA Konya Havalimanı\",\n            \"flightNumber\": \"PG123\",\n            \"departureDateAndTime\": \"2023-08-15T14:30:45\",\n            \"arrivalDateAndTime\": \"2023-08-15T15:30:45\",\n            \"airlineCompanyName\": \"Pegasus Hava Yolları\",\n            \"capacity\": 3,\n            \"price\": 589.99\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ROUTE",
+			"item": [
+				{
+					"name": "SAVE ROUTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"routeName\": \"ADB Adnan Menderes Havalimanı - VAN Van Ferit Melen Havalimanı\",\r\n    \"departureAirportId\": 14,\r\n    \"arrivalAirportId\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/routes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"routes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "NAME EXCEPTİON",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeName\": \" \",\r\n    \"airlineCompanyId\": 4,\r\n    \"departureAirportId\": 1,\r\n    \"arrivalAirportId\": 6,\r\n    \"flightTime\": 1.5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/routes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"routes"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Aug 2023 09:09:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    \"The route name must be 10 and 50 characters long!\"\n]"
+						},
+						{
+							"name": "SAVE ROUTE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeName\": \"SAW İstanbul Havalimanı - NOP Sinop Havalimanı\",\r\n    \"airlineCompanyId\": 4,\r\n    \"departureAirportId\": 12,\r\n    \"arrivalAirportId\": 18,\r\n    \"flightTime\": 1.5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/routes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"routes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:12:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"id\": 1,\n        \"routeName\": \"IST İstanbul Havalimanı- ESB Ankara Havalimanı\",\n        \"airlineCompanyName\": \"Türk Hava Yolları\",\n        \"departureAirportName\": \"Ankara Esenboğa Havalimanı\",\n        \"arrivalAirportName\": \"İstanbul Havalimanı\",\n        \"flightTime\": 1\n    },\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "SAVE ROUTE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeName\": \"DIY Diyarbakır Havalimanı - KYA Konya Havalimanı\",\r\n    \"departureAirportId\": 8,\r\n    \"arrivalAirportId\": 15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/routes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"routes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 07:12:56 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"id\": 3,\n        \"routeName\": \"DIY Diyarbakır Havalimanı - KYA Konya Havalimanı\",\n        \"departureAirportName\": \"Diyarbakır Havalimanı\",\n        \"arrivalAirportName\": \"Konya Havalimanı\"\n    },\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "GET ALL ROUTES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/routes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"routes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET ALL ROUTES",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/routes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"routes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 04 Aug 2023 17:07:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"departureAirportName\": \"Cengiz Topel Havalimanı\",\n        \"arrivalAirportName\": \"Konya Havalimanı\",\n        \"flightTime\": 2\n    },\n    {\n        \"id\": 2,\n        \"departureAirportName\": \"İstanbul Havalimanı\",\n        \"arrivalAirportName\": \"Sinop Havalimanı\",\n        \"flightTime\": 1\n    },\n    {\n        \"id\": 3,\n        \"departureAirportName\": \"İstanbul Havalimanı\",\n        \"arrivalAirportName\": \"Adnan Menderes Havalimanı\",\n        \"flightTime\": 1\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "SEARCH",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"departure\": {\"name\" : \"İstanbul\"} ,\r\n    \"arrival\":  {\"name\" : \"Ankara\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/routes/search",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"routes",
+								"search"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SEACRH ROUTENAME",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeName\": \"nop\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/routes/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"routes",
+										"search"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 10:08:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"routeName\": \"SAW Sabiha Gökçen Havalimanı - NOP Sinop Havalimanı\",\n            \"departureAirportName\": \"Sabiha Gökçen Havalimanı\",\n            \"arrivalAirportName\": \"Sinop Havalimanı\"\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "TICKET",
+			"item": [
+				{
+					"name": "SAVE TICKET",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"flightId\": 1,\r\n    \"ticketStatus\": \"COMPLETED\",\r\n    \"passengerRequest\": {\r\n        \"name\": \"Burcu\",\r\n        \"surName\": \"Sert\",\r\n        \"identificationNumber\": \"12589652375\",\r\n        \"email\": \"Burcu57@gmail.com\",\r\n        \"contactNumber\": \"5367215698\"\r\n    },\r\n    \"paymentRequest\": {\r\n        \"creditCardNumber\": \"1234-5678-8523,9635\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/tickets",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "TICKET_SOLD_OUT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ticketNumber\": \"KLM123456\",\r\n    \"passengerId\": 6,\r\n    \"flightId\": 1,\r\n    \"purchaseDateAndTime\": \"2023-08-10T10:50:45\",\r\n    \"ticketStatus\": \"COMPLETED\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/tickets",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 10 Aug 2023 19:13:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"error\": \"Bu uçuş için bilet tükenmiştir.\",\n    \"data\": null,\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "SAVE TICKET",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"flightId\": 1,\r\n    \"ticketStatus\": \"COMPLETED\",\r\n    \"passengerRequest\": {\r\n        \"name\": \"Burcu\",\r\n        \"surName\": \"Sert\",\r\n        \"identificationNumber\": \"12589652375\",\r\n        \"email\": \"Burcu57@gmail.com\",\r\n        \"contactNumber\": \"5367215698\"\r\n    },\r\n    \"paymentRequest\": {\r\n        \"creditCardNumber\": \"1234-5678-8523,9635\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/tickets",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:30:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"ticketNumber\": \"91527005-5\",\n        \"purchaseDateAndTime\": \"2023-08-14T20:30:13.4639517\",\n        \"ticketStatus\": \"COMPLETED\",\n        \"passengerResponse\": {\n            \"id\": 1,\n            \"nameSurname\": \"Burcu Sert\",\n            \"identificationNumber\": \"12589652375\",\n            \"email\": \"Burcu57@gmail.com\",\n            \"contactNumber\": \"5367215698\"\n        },\n        \"paymentResponse\": {\n            \"id\": 1,\n            \"creditCardNumber\": \"************9635\"\n        },\n        \"routeName\": \"ESB Ankara Havalimanı - KYA Konya Havalimanı\"\n    },\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "SAVE TICKET",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"flightId\": 2,\r\n    \"ticketStatus\": \"COMPLETED\",\r\n    \"passengerRequest\": {\r\n        \"name\": \"Burcu\",\r\n        \"surName\": \"Sert\",\r\n        \"identificationNumber\": \"12589652375\",\r\n        \"email\": \"Burcu57@gmail.com\",\r\n        \"contactNumber\": \"5367215698\"\r\n    },\r\n    \"paymentRequest\": {\r\n        \"creditCardNumber\": \"1234-5678-8523,9635\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/tickets",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:32:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"ticketNumber\": \"f80fd9d7-2\",\n        \"purchaseDateAndTime\": \"2023-08-14T20:32:43.1409785\",\n        \"ticketStatus\": \"COMPLETED\",\n        \"passengerResponse\": {\n            \"id\": 1,\n            \"nameSurname\": \"Burcu Sert\",\n            \"identificationNumber\": \"12589652375\",\n            \"email\": \"Burcu57@gmail.com\",\n            \"contactNumber\": \"5367215698\"\n        },\n        \"paymentResponse\": {\n            \"id\": 2,\n            \"creditCardNumber\": \"************9635\"\n        },\n        \"routeName\": \"SAW İstanbul Havalimanı - NOP Sinop Havalimanı\"\n    },\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "SAVE TICKET",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"flightId\": 1,\r\n    \"ticketStatus\": \"COMPLETED\",\r\n    \"passengerRequest\": {\r\n        \"name\": \"Çiğdem\",\r\n        \"surName\": \"Sert\",\r\n        \"identificationNumber\": \"89689652375\",\r\n        \"email\": \"Çigdem57@gmail.com\",\r\n        \"contactNumber\": \"5367215689\"\r\n    },\r\n    \"paymentRequest\": {\r\n        \"creditCardNumber\": \"1234-5678-8523-8523\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/tickets",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:37:28 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"ticketNumber\": \"635c2839-b\",\n        \"purchaseDateAndTime\": \"2023-08-14T20:37:28.0934567\",\n        \"ticketStatus\": \"COMPLETED\",\n        \"passengerResponse\": {\n            \"id\": 2,\n            \"nameSurname\": \"Çiğdem Sert\",\n            \"identificationNumber\": \"89689652375\",\n            \"email\": \"Çigdem57@gmail.com\",\n            \"contactNumber\": \"5367215689\"\n        },\n        \"paymentResponse\": {\n            \"id\": 3,\n            \"creditCardNumber\": \"************8523\"\n        },\n        \"routeName\": \"ESB Ankara Havalimanı - KYA Konya Havalimanı\"\n    },\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "TICKET_SOLD_OUT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"flightId\": 1,\r\n    \"ticketStatus\": \"COMPLETED\",\r\n    \"passengerRequest\": {\r\n        \"name\": \"Polat\",\r\n        \"surName\": \"Sert\",\r\n        \"identificationNumber\": \"89689652389\",\r\n        \"email\": \"Polat57@gmail.com\",\r\n        \"contactNumber\": \"5357215689\"\r\n    },\r\n    \"paymentRequest\": {\r\n        \"creditCardNumber\": \"1234-7896-8523-8523\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/tickets",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:45:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"error\": \"Tickets for this flight are sold out.\",\n    \"data\": null,\n    \"isSuccess\": false\n}"
+						},
+						{
+							"name": "CANCEL TICKET",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"flightId\": 1,\r\n    \"ticketStatus\": \"COMPLETED\",\r\n    \"passengerRequest\": {\r\n        \"name\": \"Polat\",\r\n        \"surName\": \"Sert\",\r\n        \"identificationNumber\": \"89689652389\",\r\n        \"email\": \"Polat57@gmail.com\",\r\n        \"contactNumber\": \"5357215689\"\r\n    },\r\n    \"paymentRequest\": {\r\n        \"creditCardNumber\": \"1234-7896-8523-8523\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/tickets/cancel/3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets",
+										"cancel",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 17:55:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": \"Ticket canceled\",\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "SAVE TICKET",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"flightId\": 1,\r\n    \"ticketStatus\": \"COMPLETED\",\r\n    \"passengerRequest\": {\r\n        \"name\": \"Polat\",\r\n        \"surName\": \"Sert\",\r\n        \"identificationNumber\": \"89689652389\",\r\n        \"email\": \"Polat57@gmail.com\",\r\n        \"contactNumber\": \"5357215689\"\r\n    },\r\n    \"paymentRequest\": {\r\n        \"creditCardNumber\": \"1234-7896-8523-8523\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/tickets",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 18:03:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"ticketNumber\": \"0a7bba22-a\",\n        \"purchaseDateAndTime\": \"2023-08-14T21:03:47.0747619\",\n        \"ticketStatus\": \"COMPLETED\",\n        \"passengerResponse\": {\n            \"id\": 4,\n            \"nameSurname\": \"Polat Sert\",\n            \"identificationNumber\": \"89689652389\",\n            \"email\": \"Polat57@gmail.com\",\n            \"contactNumber\": \"5357215689\"\n        },\n        \"paymentResponse\": {\n            \"id\": 6,\n            \"creditCardNumber\": \"************8523\"\n        },\n        \"routeName\": \"ESB Ankara Havalimanı - KYA Konya Havalimanı\"\n    },\n    \"isSuccess\": true\n}"
+						},
+						{
+							"name": "SAVE TICKET",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"flightId\": 1,\r\n    \"ticketStatus\": \"COMPLETED\",\r\n    \"passengerRequest\": {\r\n        \"name\": \"Çiğdem\",\r\n        \"surName\": \"Sert\",\r\n        \"identificationNumber\": \"89689652311\",\r\n        \"email\": \"cigdem34@gmail.com\",\r\n        \"contactNumber\": \"5337215689\"\r\n    },\r\n    \"paymentRequest\": {\r\n        \"creditCardNumber\": \"1234-7896-1659-8523\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/tickets",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 08:41:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"error\": \"Tickets for this flight are sold out.\",\n    \"data\": null,\n    \"isSuccess\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "GET ALL TİCKETS",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "GET ALL TİCKETS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/tickets",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Aug 2023 19:58:44 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": [\n        {\n            \"ticketNumber\": \"91527005-5\",\n            \"purchaseDateAndTime\": \"2023-08-14T20:30:13.463952\",\n            \"ticketStatus\": \"COMPLETED\",\n            \"passengerResponse\": {\n                \"id\": 1,\n                \"nameSurname\": \"Burcu Sert\",\n                \"identificationNumber\": \"12589652375\",\n                \"email\": \"Burcu57@gmail.com\",\n                \"contactNumber\": \"5367215698\"\n            },\n            \"paymentResponse\": {\n                \"id\": 1,\n                \"creditCardNumber\": \"************9635\"\n            },\n            \"routeName\": \"ESB Ankara Havalimanı - KYA Konya Havalimanı\"\n        },\n        {\n            \"ticketNumber\": \"f80fd9d7-2\",\n            \"purchaseDateAndTime\": \"2023-08-14T20:32:43.140979\",\n            \"ticketStatus\": \"COMPLETED\",\n            \"passengerResponse\": {\n                \"id\": 1,\n                \"nameSurname\": \"Burcu Sert\",\n                \"identificationNumber\": \"12589652375\",\n                \"email\": \"Burcu57@gmail.com\",\n                \"contactNumber\": \"5367215698\"\n            },\n            \"paymentResponse\": {\n                \"id\": 2,\n                \"creditCardNumber\": \"************9635\"\n            },\n            \"routeName\": \"SAW İstanbul Havalimanı - NOP Sinop Havalimanı\"\n        },\n        {\n            \"ticketNumber\": \"635c2839-b\",\n            \"purchaseDateAndTime\": \"2023-08-14T20:37:28.093457\",\n            \"ticketStatus\": \"CANCELED\",\n            \"passengerResponse\": {\n                \"id\": 2,\n                \"nameSurname\": \"Çiğdem Sert\",\n                \"identificationNumber\": \"89689652375\",\n                \"email\": \"Çigdem57@gmail.com\",\n                \"contactNumber\": \"5367215689\"\n            },\n            \"paymentResponse\": {\n                \"id\": 3,\n                \"creditCardNumber\": \"************8523\"\n            },\n            \"routeName\": \"ESB Ankara Havalimanı - KYA Konya Havalimanı\"\n        },\n        {\n            \"ticketNumber\": \"61df749a-6\",\n            \"purchaseDateAndTime\": \"2023-08-14T20:44:21.158581\",\n            \"ticketStatus\": \"COMPLETED\",\n            \"passengerResponse\": {\n                \"id\": 2,\n                \"nameSurname\": \"Çiğdem Sert\",\n                \"identificationNumber\": \"89689652375\",\n                \"email\": \"Çigdem57@gmail.com\",\n                \"contactNumber\": \"5367215689\"\n            },\n            \"paymentResponse\": {\n                \"id\": 4,\n                \"creditCardNumber\": \"************8523\"\n            },\n            \"routeName\": \"ESB Ankara Havalimanı - KYA Konya Havalimanı\"\n        },\n        {\n            \"ticketNumber\": \"0a7bba22-a\",\n            \"purchaseDateAndTime\": \"2023-08-14T21:03:47.074762\",\n            \"ticketStatus\": \"COMPLETED\",\n            \"passengerResponse\": {\n                \"id\": 4,\n                \"nameSurname\": \"Polat Sert\",\n                \"identificationNumber\": \"89689652389\",\n                \"email\": \"Polat57@gmail.com\",\n                \"contactNumber\": \"5357215689\"\n            },\n            \"paymentResponse\": {\n                \"id\": 6,\n                \"creditCardNumber\": \"************8523\"\n            },\n            \"routeName\": \"ESB Ankara Havalimanı - KYA Konya Havalimanı\"\n        }\n    ],\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "SEARCH",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "SEARCH TİCKET NUMBER",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/tickets/search?ticketNumber=606339a2-c",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets",
+										"search"
+									],
+									"query": [
+										{
+											"key": "ticketNumber",
+											"value": "606339a2-c"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 08:48:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"error\": \"no message available.\",\n    \"data\": {\n        \"ticketNumber\": \"606339a2-c\",\n        \"purchaseDateAndTime\": \"2023-08-15T11:35:09.356686\",\n        \"ticketStatus\": \"COMPLETED\",\n        \"passengerResponse\": {\n            \"id\": 1,\n            \"nameSurname\": \"Polat Sert\",\n            \"identificationNumber\": \"89689652389\",\n            \"email\": \"Polat57@gmail.com\",\n            \"contactNumber\": \"5357215689\"\n        },\n        \"paymentResponse\": {\n            \"id\": 1,\n            \"creditCardNumber\": \"************8523\"\n        },\n        \"routeName\": \"SAW Sabiha Gökçen Havalimanı - NOP Sinop Havalimanı\"\n    },\n    \"isSuccess\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "CANCEL TICKET",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tickets/cancel/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"cancel",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CANCEL TICKET",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/tickets/cancel/3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"tickets",
+										"cancel",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Aug 2023 08:43:41 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 201,\n    \"error\": \"no message available.\",\n    \"data\": \"Ticket canceled\",\n    \"isSuccess\": true\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

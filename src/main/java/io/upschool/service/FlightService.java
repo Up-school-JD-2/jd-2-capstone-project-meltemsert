@@ -90,13 +90,7 @@ public class FlightService {
                     .build();
             routeBuilder.arrivalAirport(arrivalAirport);
         }
-        if (request.getRoute().getAirline() != null) {
-            AirlineCompany airlineCompany = AirlineCompany.builder()
-                    .name(request.getRoute().getAirline().getName())
-                    .iataCode(request.getRoute().getAirline().getIataCode())
-                    .build();
-            routeBuilder.airlineCompany(airlineCompany);
-        }
+
         if (request.getRoute().getRouteName() != null) {
             routeBuilder.routeName(request.getRoute().getRouteName());
         }

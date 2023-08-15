@@ -27,15 +27,8 @@ public class Route {
     private Airport departureAirport;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "airline_company_id", nullable = false)
-    private AirlineCompany airlineCompany;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "arrival_airport_id", nullable = false)
     private Airport arrivalAirport;
-
-    @Column(name= "flight_time", nullable = false, length = 5)
-    private Float flightTime;
 
     @Column(name = "active")
     @Builder.Default
